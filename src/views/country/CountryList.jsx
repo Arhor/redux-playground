@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchCountries, getCountries} from '../../store/country';
 
-const Country = () => {
+const CountryList = () => {
   const countries = useSelector(getCountries);
   const dispatch = useDispatch();
 
@@ -28,4 +28,4 @@ const Country = () => {
   );
 }
 
-export default Country;
+export default CountryList;
