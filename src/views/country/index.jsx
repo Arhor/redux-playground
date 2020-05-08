@@ -1,5 +1,5 @@
 import React from 'react';
-import CountryList from './CountryList';
+import CountryList from '@/views/country/CountryList';
 
 const Country = () => (
   <>

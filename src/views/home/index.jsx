@@ -1,5 +1,5 @@
 import React from 'react';
-import { locales, localize, fetchTranslations } from '../../store/localization';
+import { locales, localize, fetchTranslations } from '@/store/localization';
 import { useSelector, useDispatch } from 'react-redux';
 
 const Home = () => {

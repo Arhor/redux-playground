@@ -1,5 +1,14 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+
+export const fetchCountries = createAsyncThunk(
+  'country/fetchCountries',
+  async () => {
+    const { data } = await axios.get('https://restcountries.eu/rest/v2/region/europe');
+    console.log(data)
+    return data;
+  }
+);
 
 export const countrySlice = createSlice({
   name: 'country',
@@ -7,24 +16,23 @@ export const countrySlice = createSlice({
     all: [],
   },
   reducers: {
-    setCountries: (state, action) => {
-      state.all = action.payload;
-    },
   },
+  extraReducers: {
+    [fetchCountries.rejected]: (...args) => {
+      console.log('-------------------------------------------------------------------')
+      args.forEach(a => console.error(a));
+      console.log('-------------------------------------------------------------------')
+    },
+    [fetchCountries.fulfilled]: (state, action) => {
+      const fetchedCountries = state.all.map(c => c.name);
+      const newCountries = action.payload.filter(c => !fetchedCountries.includes(c.name));
+      state.all = [
+        ...state.all,
+        ...newCountries
+      ];
+    }
+  }
 });
-
-export const { setCountries } = countrySlice.actions;
-
-export const fetchCountries = () => dispatch => {
-  axios
-    .get('https://restcountries.eu/rest/v2/region/europe')
-    .then(res => {
-      console.log(res);
-      const { data } = res;
-      dispatch(setCountries(data));
-    })
-    .catch(err => console.error(err));
-};
 
 export const getCountries = state => state.country.all;
 

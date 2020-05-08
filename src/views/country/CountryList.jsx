@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchCountries, getCountries} from '../../store/country';
+import { fetchCountries, getCountries} from '@/store/country';
 
 const CountryList = () => {
   const countries = useSelector(getCountries);
@@ -20,7 +20,7 @@ const CountryList = () => {
       <tbody>
         {countries.map(country => (
           <tr key={country.numericCode}>
-            <td>{country.name}</td>
+            <td key={country.numericCode}>{country.name}</td>
           </tr>
         ))}
       </tbody>

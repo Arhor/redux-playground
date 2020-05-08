@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { refExists } from '../../util/helpers.js';
-import { default as russian } from '../../assets/translations/lang-ru.json';
+import { refExists } from '@/util/helpers.js';
+import { default as russian } from '@/assets/translations/lang-ru.json';
 
 export const fetchTranslations = createAsyncThunk(
   'localization/fetchTranslations',
